@@ -12,6 +12,7 @@ import ovh.vicart.ideasbackend.models.TokenizedAuth
 import ovh.vicart.ideasbackend.repositories.UserRepository
 
 @RestController
+@CrossOrigin
 class AuthController {
 
     @Autowired

@@ -26,4 +26,7 @@ class Users {
 
     @OneToMany(mappedBy = "targetUsers")
     lateinit var sharesFrom: List<Shares>
+
+    @Column(name = "display_name", nullable = false)
+    lateinit var displayName: String
 }

@@ -11,6 +11,7 @@ import ovh.vicart.ideasbackend.services.JwtUserService
 import java.util.*
 
 @RestController
+@CrossOrigin
 class IdeasController {
 
     @Autowired
