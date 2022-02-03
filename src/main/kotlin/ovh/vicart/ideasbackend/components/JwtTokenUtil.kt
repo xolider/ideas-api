@@ -23,7 +23,8 @@ class JwtTokenUtil : Serializable {
     private lateinit var secret: String
 
     fun getUsernameFromToken(token: String) : String {
-        return getClaimFromToken(token, Claims::getSubject)
+        val realToken = token.replace("Bearer ", "")
+        return getClaimFromToken(realToken, Claims::getSubject)
     }
 
     fun getExpirationDateFromToken(token: String) : Date {
@@ -45,7 +46,7 @@ class JwtTokenUtil : Serializable {
     }
 
     fun generateToken(user: Users) : String {
-        return doGenerateToken(user.username)
+        return doGenerateToken(user.username!!)
     }
 
     private fun doGenerateToken(subject: String) : String {
@@ -55,7 +56,8 @@ class JwtTokenUtil : Serializable {
     }
 
     fun validateToken(token: String, usernameProvided: String) : Boolean {
-        val username = getUsernameFromToken(token)
-        return usernameProvided == username && !isTokenExpired(token)
+        val realToken = token.replace("Bearer ", "")
+        val username = getUsernameFromToken(realToken)
+        return usernameProvided == username && !isTokenExpired(realToken)
     }
 }

@@ -10,23 +10,23 @@ class Users {
     var id: Long? = null
 
     @Column(unique = true, nullable = false)
-    lateinit var username: String
+    var username: String? = null
     @Column(unique = true, nullable = false)
-    lateinit var email: String
+    var email: String? = null
     @Column(nullable = false)
-    lateinit var password: String
+    var password: String? = null
     @Column(name = "picture_path")
-    lateinit var picturePath: String
+    var picturePath: String? = null
 
     @OneToMany(mappedBy = "user")
-    lateinit var ideas: List<Idea>
+    var ideas: List<Idea>? = null
 
     @OneToMany(mappedBy = "ownerUsers")
-    lateinit var sharesTo: List<Shares>
+    var sharesTo: List<Shares>? = null
 
     @OneToMany(mappedBy = "targetUsers")
-    lateinit var sharesFrom: List<Shares>
+    var sharesFrom: List<Shares>? = null
 
     @Column(name = "display_name")
-    lateinit var displayName: String
+    var displayName: String? = null
 }

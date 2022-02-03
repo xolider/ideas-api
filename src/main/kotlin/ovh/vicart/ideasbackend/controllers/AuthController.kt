@@ -10,6 +10,7 @@ import ovh.vicart.ideasbackend.entities.Users
 import ovh.vicart.ideasbackend.models.CredentialsAuth
 import ovh.vicart.ideasbackend.models.TokenizedAuth
 import ovh.vicart.ideasbackend.repositories.UserRepository
+import ovh.vicart.ideasbackend.services.JwtUserService
 
 @RestController
 @CrossOrigin
@@ -17,6 +18,9 @@ class AuthController {
 
     @Autowired
     private lateinit var jwtTokenUtil: JwtTokenUtil
+
+    @Autowired
+    private lateinit var jwtUserService: JwtUserService
 
     @Autowired
     private lateinit var userRepo: UserRepository
@@ -42,7 +46,8 @@ class AuthController {
     fun getCheck(@RequestHeader("authorization") token: String) : ResponseEntity<Any> {
         val username = jwtTokenUtil.getUsernameFromToken(token)
         if(jwtTokenUtil.validateToken(token, username)) {
-            return ResponseEntity.ok().build()
+            val user = jwtUserService.loadByUsername(username)
+            return ResponseEntity.ok(user)
         }
         return ResponseEntity.badRequest().build()
     }

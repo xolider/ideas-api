@@ -38,7 +38,7 @@ class IdeasController {
         val username = jwtTokenUtil.getUsernameFromToken(token)
         if(jwtTokenUtil.validateToken(token, username)) {
             val user = jwtUserService.loadByUsername(username)
-            return ResponseEntity.ok(user.sharesFrom.map { it.idea })
+            return ResponseEntity.ok(user.sharesFrom!!.map { it.idea })
         }
         return ResponseEntity.badRequest().build()
     }
@@ -61,7 +61,7 @@ class IdeasController {
         val username = jwtTokenUtil.getUsernameFromToken(token)
         if(jwtTokenUtil.validateToken(token, username)) {
             val user = jwtUserService.loadByUsername(username)
-            val userIdea = user.ideas.any { it.id == id }
+            val userIdea = user.ideas!!.any { it.id == id }
             if(userIdea) {
                 idea.id = id
                 ideaRepo.save(idea)
@@ -76,7 +76,7 @@ class IdeasController {
         val username = jwtTokenUtil.getUsernameFromToken(token)
         if(jwtTokenUtil.validateToken(token, username)) {
             val user = jwtUserService.loadByUsername(username)
-            val belongsToUser = user.ideas.any { it.id == id }
+            val belongsToUser = user.ideas!!.any { it.id == id }
             if(belongsToUser) {
                 ideaRepo.deleteById(id)
                 return ResponseEntity.ok().build()
