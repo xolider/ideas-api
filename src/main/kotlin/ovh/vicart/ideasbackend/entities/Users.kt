@@ -27,6 +27,6 @@ class Users {
     @OneToMany(mappedBy = "targetUsers")
     lateinit var sharesFrom: List<Shares>
 
-    @Column(name = "display_name", nullable = false)
+    @Column(name = "display_name")
     lateinit var displayName: String
 }

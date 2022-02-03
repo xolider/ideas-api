@@ -25,6 +25,7 @@ class AuthController {
     fun postAuth(@RequestBody auth: CredentialsAuth) : ResponseEntity<Any> {
         val matcher = ExampleMatcher.matching().withIgnorePaths("picturePath")
             .withIgnorePaths("email")
+            .withIgnorePaths("displayName")
             .withStringMatcher(ExampleMatcher.StringMatcher.EXACT)
         val user = userRepo.findOne(Example.of(Users().apply {
             this.username = auth.username
