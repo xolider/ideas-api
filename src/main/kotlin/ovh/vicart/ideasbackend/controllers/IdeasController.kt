@@ -28,7 +28,10 @@ class IdeasController {
         val username = jwtTokenUtil.getUsernameFromToken(token)
         if(jwtTokenUtil.validateToken(token, username)) {
             val user = jwtUserService.loadByUsername(username)
-            return ResponseEntity.ok(user.ideas)
+            return ResponseEntity.ok(user.ideas?.map {
+                it.user = null
+                it
+            })
         }
         return ResponseEntity.noContent().build()
     }

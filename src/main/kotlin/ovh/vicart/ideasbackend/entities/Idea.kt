@@ -17,7 +17,7 @@ class Idea {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    lateinit var user: Users
+    var user: Users? = null
 
     @OneToMany(mappedBy = "idea")
     lateinit var shared: List<Shares>
