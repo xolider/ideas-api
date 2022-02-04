@@ -1,5 +1,6 @@
 package ovh.vicart.ideasbackend.entities
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import javax.persistence.*
 
 @Entity(name = "idea")
@@ -17,6 +18,7 @@ class Idea {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @JsonBackReference
     var user: Users? = null
 
     @OneToMany(mappedBy = "idea")
