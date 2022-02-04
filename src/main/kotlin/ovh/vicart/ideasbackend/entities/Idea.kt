@@ -1,6 +1,7 @@
 package ovh.vicart.ideasbackend.entities
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity(name = "idea")
@@ -14,6 +15,8 @@ class Idea {
     lateinit var title: String
 
     lateinit var text: String
+
+    var datetime: OffsetDateTime = OffsetDateTime.now()
     var favorite: Boolean? = null
 
     @ManyToOne
