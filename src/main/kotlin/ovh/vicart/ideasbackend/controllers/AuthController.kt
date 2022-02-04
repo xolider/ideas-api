@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 import ovh.vicart.ideasbackend.components.JwtTokenUtil
 import ovh.vicart.ideasbackend.entities.Users
 import ovh.vicart.ideasbackend.models.CredentialsAuth
+import ovh.vicart.ideasbackend.models.RegisterCredentialsAuth
 import ovh.vicart.ideasbackend.models.TokenizedAuth
 import ovh.vicart.ideasbackend.repositories.UserRepository
 import ovh.vicart.ideasbackend.services.JwtUserService
@@ -50,5 +51,16 @@ class AuthController {
             return ResponseEntity.ok(user)
         }
         return ResponseEntity.badRequest().build()
+    }
+
+    @PostMapping("/register")
+    fun postRegister(@RequestBody cred: RegisterCredentialsAuth) : ResponseEntity<Any> {
+        val user = Users()
+        user.username = cred.username
+        user.displayName = cred.displayName
+        user.email = cred.email
+        user.password = cred.password
+        userRepo.save(user)
+        return ResponseEntity.ok().build()
     }
 }
