@@ -64,6 +64,7 @@ class IdeasController {
             val userIdea = user.ideas!!.any { it.id == id }
             if(userIdea) {
                 idea.id = id
+                idea.user = user
                 ideaRepo.save(idea)
                 return ResponseEntity.ok().build()
             }
