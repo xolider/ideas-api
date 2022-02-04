@@ -22,5 +22,5 @@ class Idea {
     var user: Users? = null
 
     @OneToMany(mappedBy = "idea")
-    lateinit var shared: List<Shares>
+    var shared: List<Shares>? = null
 }
